@@ -1,0 +1,31 @@
+<% local_domain = "#{request.protocol}#{request.host_with_port}" %>
+
+<p><%= t 'page_not_found.title' %></p>
+<table>
+  <tr>
+    <td style="vertical-align:top; padding:0 20px 20px 0;">
+      <h2><%= t 'page_not_found.latest_topics' %></h2>
+      <% @latest.each do |t| %>
+        <%= link_to t.title, t.relative_url %><br/>
+      <% end %>
+      <br/>
+      <a href="/latest" class="btn"><%= t 'page_not_found.see_more' %>&hellip;</a>
+    </td>
+    <td style="vertical-align:top; padding:0 0 20px 0;">
+      <h2><%= t 'page_not_found.recent_topics' %></h2>
+      <% @recent.each do |t| %>
+        <%= link_to t.title, t.relative_url %><br/>
+      <% end %>
+      <br/>
+      <a href="/new" class="btn"><%= t 'page_not_found.see_more' %>&hellip;</a>
+    </td>
+  </tr>
+</table>
+<h2><%= t 'page_not_found.search_title' %></h2>
+<p>
+  <form action='http://google.com'>
+    <input type="text" name='q' value="site:<%= local_domain %> <%= @slug %>">
+    <!--<input type="button" class="btn" value="Search Here" onclick="alert('single page search results not implemented yet');" />-->
+    <input type="submit" class="btn btn-primary" value="<%= t 'page_not_found.search_google' %>" />
+  </form>
+</p>
